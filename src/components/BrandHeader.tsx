@@ -22,15 +22,24 @@ export function BrandHeader() {
       <div className="announcement">{useTranslations()('Announcement')}</div>
       <header className="site-header">
         <Link href="/" className="brand-mark" onClick={() => setOpen(false)}>
-          <Image
-            className="brand-logo"
-            src="/brand/coat-of-arms-logo.png"
-            alt="Coat of Arms — European Copper Plate Archive"
-            width={2159}
-            height={728}
-            priority
-            unoptimized
-          />
+          <span className="brand-logo-lockup">
+            <span className="brand-logo-emblem">
+              <Image
+                className="brand-logo"
+                src="/brand/coat-of-arms-emblem.svg"
+                alt=""
+                aria-hidden="true"
+                width={985}
+                height={1011}
+                priority
+                unoptimized
+              />
+            </span>
+            <span className="brand-logo-copy">
+              <strong>Coat of Arms</strong>
+              <small>European Copper Plate Archive</small>
+            </span>
+          </span>
         </Link>
         <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>
           {open ? t('close') : t('menu')}<span aria-hidden="true">{open ? '×' : '☰'}</span>
