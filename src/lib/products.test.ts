@@ -6,6 +6,10 @@ describe('product catalogue', () => {
     expect(products).toHaveLength(9);
     expect(new Set(products.map((product) => product.slug)).size).toBe(9);
     expect(products.every((product) => product.image.startsWith('/images/products/'))).toBe(true);
+    expect(products.every((product) => product.exhibitionImage?.startsWith('/images/exhibitions/'))).toBe(true);
+  });
+  it('publishes the available city making films', () => {
+    expect(products.filter((product) => product.processVideo).map((product) => product.slug)).toEqual(['ceske-budejovice', 'hradec-kralove']);
   });
   it('keeps server prices in positive integer cents', () => {
     expect(products.every((product) => Number.isInteger(product.priceCents) && product.priceCents > 0)).toBe(true);

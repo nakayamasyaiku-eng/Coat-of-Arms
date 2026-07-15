@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
@@ -72,10 +73,6 @@ export default async function ProductPage({
             orientation={p.orientation}
             priority
           />
-          <div className="detail-strip">
-            <div><div className="artwork-placeholder" role="img" aria-label={`${copy.alt} — detail`} /></div>
-            <div><div className="artwork-placeholder" role="img" aria-label={`${copy.alt} — surface detail`} /></div>
-          </div>
         </div>
         <div className="product-info">
           <Link className="back-link" href="/collection">
@@ -116,34 +113,73 @@ export default async function ProductPage({
           </aside>
         </div>
       </div>
-      <div className="section-shell product-story">
-        <article>
-          <p className="kicker">I · {t("storyTitle")}</p>
-          <h2>{copy.city}</h2>
-          <p>{copy.story}</p>
-        </article>
-        <article>
-          <p className="kicker">II · {t("heraldryTitle")}</p>
-          <h2>{copy.short}</h2>
-          <p>{copy.heraldry}</p>
-        </article>
-        <article>
-          <p className="kicker">III · {t("traceTitle")}</p>
-          <h2>
-            {locale === "zh" ? "铜面不是空白的" : "The surface is not neutral"}
-          </h2>
-          <p>{t("traceText")}</p>
-        </article>
-        <article>
-          <p className="kicker">IV · {t("deliveryTitle")}</p>
-          <h2>
-            {locale === "zh"
-              ? "为一次长途保存而包装"
-              : "Packed for a long journey"}
-          </h2>
-          <p>{t("deliveryText")}</p>
-        </article>
-      </div>
+      <section className="section-shell product-story">
+        <div className="product-story-media">
+          <article className="story-media-card exhibition-media-card">
+            <div className="story-media-visual exhibition-visual">
+              {p.exhibitionImage ? (
+                <Image
+                  src={p.exhibitionImage}
+                  alt={t("exhibitionAlt", { city: copy.city })}
+                  fill
+                  sizes="(max-width: 760px) calc(100vw - 82px), 50vw"
+                />
+              ) : (
+                <div className="media-placeholder exhibition-placeholder">
+                  <div className="gallery-preview" aria-hidden="true">
+                    <Image src={p.image} alt="" fill sizes="220px" />
+                  </div>
+                  <small>{t("mediaPending")}</small>
+                </div>
+              )}
+            </div>
+            <p className="kicker">I · {t("exhibitionTitle")}</p>
+            <h3>{t("exhibitionHeading")}</h3>
+            <p>{t("exhibitionText")}</p>
+          </article>
+
+          <article className="story-media-card video-media-card">
+            <div className="story-media-visual story-video-visual">
+              {p.processVideo ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="auto"
+                  poster={p.image}
+                >
+                  <source src={p.processVideo} type="video/mp4" />
+                </video>
+              ) : (
+                <div className="media-placeholder video-placeholder">
+                  <span aria-hidden="true">▶</span>
+                  <small>{t("mediaPending")}</small>
+                </div>
+              )}
+            </div>
+            <p className="kicker">II · {t("processVideoTitle")}</p>
+            <h3>{t("processVideoHeading")}</h3>
+            <p>{t("processVideoText")}</p>
+          </article>
+        </div>
+
+        <header className="product-story-intro">
+          <div>
+            <p className="kicker">III · {t("storyTitle")}</p>
+            <h2>{copy.city}</h2>
+            <p className="story-deck">{copy.short}</p>
+          </div>
+          <div className="story-copy">
+            <p>{copy.story}</p>
+            <p>
+              <strong>{t("heraldryTitle")}</strong>
+              {copy.heraldry}
+            </p>
+          </div>
+        </header>
+      </section>
       <div className="section-shell related">
         <h2>{t("related")}</h2>
         <div className="product-grid">

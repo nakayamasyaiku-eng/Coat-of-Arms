@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Locale } from "@/i18n/routing";
 import type { Product } from "@/lib/products";
 import { formatPrice } from "@/lib/products";
@@ -18,11 +19,11 @@ export function ProductCard({
       className={`product-card ${product.orientation}`}
     >
       <div className="product-image-wrap">
-        <div
-          className="artwork-placeholder"
-          role="img"
-          aria-label={copy.alt}
-          data-artwork-src={product.image}
+        <Image
+          src={product.image}
+          alt={copy.alt}
+          fill
+          sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1020px) 50vw, 33vw"
         />
         <span className="edition-tab">
           {product.editionNumber}/{product.editionTotal}
