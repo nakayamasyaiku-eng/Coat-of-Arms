@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { MuseumFrame } from "@/components/MuseumFrame";
 import { ProductActions } from "@/components/ProductActions";
 import { ProductCard } from "@/components/ProductCard";
+import { AutoplayVideo } from "@/components/AutoplayVideo";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -141,17 +142,11 @@ export default async function ProductPage({
           <article className="story-media-card video-media-card">
             <div className="story-media-visual story-video-visual">
               {p.processVideo ? (
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls
-                  preload="auto"
+                <AutoplayVideo
+                  src={p.processVideo}
                   poster={p.image}
-                >
-                  <source src={p.processVideo} type="video/mp4" />
-                </video>
+                  enableSoundLabel={t("enableSound")}
+                />
               ) : (
                 <div className="media-placeholder video-placeholder">
                   <span aria-hidden="true">▶</span>
