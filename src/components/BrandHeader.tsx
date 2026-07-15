@@ -1,0 +1,46 @@
+'use client';
+
+import Image from 'next/image';
+import {useState} from 'react';
+import {useTranslations} from 'next-intl';
+import {Link, usePathname} from '@/i18n/navigation';
+import {LocaleSwitcher} from './LocaleSwitcher';
+import {CartButton} from './CartButton';
+
+const links = [
+  ['/collection', 'collection'], ['/cities', 'cities'], ['/craft', 'craft'],
+  ['/about', 'about'], ['/contact', 'contact']
+] as const;
+
+export function BrandHeader() {
+  const t = useTranslations('Nav');
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div className="announcement">{useTranslations()('Announcement')}</div>
+      <header className="site-header">
+        <Link href="/" className="brand-mark" onClick={() => setOpen(false)}>
+          <Image
+            className="brand-logo"
+            src="/brand/coat-of-arms-logo.png"
+            alt="Coat of Arms — European Copper Plate Archive"
+            width={2159}
+            height={728}
+            priority
+            unoptimized
+          />
+        </Link>
+        <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>
+          {open ? t('close') : t('menu')}<span aria-hidden="true">{open ? '×' : '☰'}</span>
+        </button>
+        <nav id="main-navigation" className={open ? 'main-nav open' : 'main-nav'} aria-label="Primary navigation">
+          {links.map(([href, key]) => <Link key={href} href={href} onClick={() => setOpen(false)} className={pathname === href ? 'active' : ''}>{t(key)}</Link>)}
+          <CartButton />
+          <LocaleSwitcher />
+        </nav>
+      </header>
+    </>
+  );
+}

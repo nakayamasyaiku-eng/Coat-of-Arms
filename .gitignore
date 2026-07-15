@@ -1,0 +1,12 @@
+node_modules
+.next
+.env*
+!.env.example
+coverage
+*.tsbuildinfo
+.tmp
+.tmp_edge_*
+.tmp_screenshots
+.agents
+repair-codex-browser.*
+*.log

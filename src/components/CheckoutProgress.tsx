@@ -1,0 +1,2 @@
+import {getTranslations} from 'next-intl/server';
+export async function CheckoutProgress({step}:{step:1|2|3}){const t=await getTranslations('Checkout');return <ol className="checkout-progress">{[['progressContact',1],['progressReview',2],['progressPayment',3]].map(([key,no])=><li key={key as string} className={step>=Number(no)?'active':''}><span>{no}</span>{t(key as 'progressContact')}</li>)}</ol>}
