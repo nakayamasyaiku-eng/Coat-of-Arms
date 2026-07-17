@@ -27,7 +27,7 @@ export default async function HomePage({params}: {params: Promise<{locale: Local
     .filter((product): product is (typeof products)[number] => Boolean(product));
   return <div className="home-page">
     <section className="hero section-shell">
-      <div className="hero-copy"><p className="kicker">{t('eyebrow')}</p><h1>{t('title')}<em>{t('titleAccent')}</em></h1><p className="hero-intro">{t('intro')}</p><div className="hero-actions"><Link className="button primary" href="/collection">{c('explore')}</Link><Link className="text-link" href="/craft">{c('discoverCraft')} <span>↗</span></Link></div><div className="hero-folio">Coat of Arms <span>·</span> MMXXVI</div></div>
+      <div className="hero-copy"><p className="kicker">{t('eyebrow')}</p><h1><span>{t('title')}</span><em>{t('titleAccent')}</em></h1><p className="hero-intro">{t('intro')}</p><div className="hero-actions"><Link className="button primary" href="/collection">{c('explore')}</Link><Link className="text-link" href="/craft">{c('discoverCraft')} <span>↗</span></Link></div><div className="hero-folio">Coat of Arms <span>·</span> MMXXVI</div></div>
       <div className="hero-art"><div className="archival-note"><span>No. 001</span><strong>{heroCopy.city}</strong><small>Copper · Hand-worked · Limited</small></div><MuseumFrame src={hero.image} alt={heroCopy.alt} priority/><div className="wax-seal" aria-hidden="true"><span>CA</span></div></div>
     </section>
     <section className="proofs section-shell">{[
