@@ -18,8 +18,9 @@ export function MuseumFrame({
   children,
   className = "",
 }: Props) {
+  const containsFrame = src.startsWith("/images/framed/");
   return (
-    <figure className={`museum-frame ${orientation} ${className}`}>
+    <figure className={`museum-frame ${orientation} ${containsFrame ? "framed-photo" : ""} ${className}`}>
       <div className="frame-inner">
         <Image
           src={src}

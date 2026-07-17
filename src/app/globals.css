@@ -100,6 +100,23 @@ img { display: block; }
   .hero { grid-template-columns: 1fr 1fr; gap: 35px; }.hero-art { padding-right: 0; }.archival-note { right: -10px; }.proofs article { padding-inline: 18px; }.product-grid { grid-template-columns: 1fr 1fr; }.archive-layout,.story-grid,.craft-editorial,.product-top { gap: 50px; }.craft-grid { grid-template-columns: 1fr 1fr; }.craft-grid article { padding-bottom: 32px; border-bottom: 1px solid var(--line); }.site-footer { grid-template-columns: minmax(250px,1.3fr) repeat(3,1fr); gap: 28px; }.cart-layout { grid-template-columns: 1.3fr .7fr; gap: 35px; }
 }
 @media (max-width: 760px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .site-header {
+    width: 100vw;
+  }
+  .menu-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    z-index: 2;
+    transform: translateY(-50%);
+  }
   .section-shell { width: min(100% - 32px, 1280px); }.announcement { height: 28px; padding-inline: 8px; font-size: 8px; letter-spacing: .11em; }.site-header { padding-inline: 16px; }.brand-logo { width: 176px; }.main-nav { padding-inline: 20px; }
   .hero { min-height: auto; grid-template-columns: 1fr; padding-block: 62px; }.hero h1 { font-size: clamp(50px,14vw,72px); }.hero-intro { margin-block: 24px; }.hero-folio { display: none; }.hero-art { min-height: 500px; padding: 16px 10px 30px; }.hero-art::before { inset: 6% 0 0 5%; }.museum-frame { padding: 15px; border-width: 4px; }.frame-inner { border-width: 9px; }.archival-note { top: 30px; right: -5px; width: 128px; }.wax-seal { width: 70px; right: 5px; }
   .proofs { grid-template-columns: 1fr; }.proofs article { border-right: 0; border-bottom: 1px solid var(--line); }.proofs article:last-child { border-bottom: 0; }
@@ -372,4 +389,307 @@ img { display: block; }
 .enable-video-sound span {
   font-size: 17px;
   line-height: 1;
+}
+
+/* Gallery refinement: framed works, restrained typography and private inquiry. */
+.museum-frame.framed-photo {
+  width: min(560px, 100%);
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  box-shadow: 0 24px 48px rgba(43, 30, 20, .2);
+}
+.museum-frame.framed-photo .frame-inner {
+  aspect-ratio: 763 / 999;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.museum-frame.framed-photo img,
+.product-image-wrap img {
+  object-fit: cover;
+}
+.product-image-wrap {
+  aspect-ratio: 763 / 999;
+  border: 0;
+  box-shadow: 0 18px 38px rgba(43, 30, 20, .17);
+}
+.product-card-copy {
+  padding-top: 16px;
+}
+.product-card-copy h3 {
+  margin-bottom: 10px;
+  font-size: clamp(22px, 2.15vw, 30px);
+  line-height: 1.16;
+}
+.product-card-copy > div {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.hero h1,
+.page-hero h1,
+.product-info h1,
+.success-panel h1 {
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.03;
+}
+[lang="zh"] .hero h1,
+[lang="zh"] .page-hero h1,
+[lang="zh"] .product-info h1,
+[lang="zh"] .success-panel h1 {
+  line-height: 1.16;
+}
+.page-hero h1 {
+  font-size: clamp(38px, 4.5vw, 60px);
+}
+.product-info h1 {
+  font-size: clamp(36px, 4vw, 54px);
+}
+.section-heading h2,
+.story-grid h2,
+.letter-cta h2 {
+  font-size: clamp(30px, 3.4vw, 48px);
+  line-height: 1.1;
+}
+.product-story-intro h2 {
+  font-size: clamp(32px, 3.8vw, 50px);
+}
+.story-media-card h3 {
+  font-size: clamp(25px, 2.5vw, 34px);
+}
+.home-page .story-copy-block h2 {
+  max-width: 18ch;
+  font-size: clamp(29px, 2.8vw, 42px);
+  white-space: normal;
+}
+.proofs article {
+  grid-template-columns: 24px 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 28px;
+}
+.home-page .proofs h2,
+.proofs h2 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.craft-grid article {
+  padding-bottom: 26px;
+}
+.craft-grid h3 {
+  font-size: 22px;
+}
+.mark-4::after {
+  content: "CA";
+}
+.acquisition-meta {
+  margin: 26px 0 12px;
+  padding-block: 16px;
+  color: var(--muted);
+  border-block: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.product-actions {
+  display: grid;
+  grid-template-columns: minmax(190px, .7fr) 1fr;
+  align-items: center;
+  gap: 18px;
+}
+.product-actions > span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.contact-layout {
+  grid-template-columns: minmax(250px, .65fr) minmax(0, 1.35fr);
+}
+.paper-form {
+  box-shadow: 0 20px 42px rgba(43, 30, 20, .08);
+}
+
+@media (max-width: 760px) {
+  .home-page,
+  .home-page .hero,
+  .home-page .hero-art {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 10.5vw, 50px) !important;
+  }
+  .page-hero h1 {
+    font-size: clamp(33px, 9.5vw, 44px) !important;
+  }
+  .product-info h1 {
+    font-size: clamp(31px, 8.8vw, 41px) !important;
+  }
+  .section-heading h2,
+  .story-grid h2,
+  .letter-cta h2 {
+    font-size: clamp(28px, 8vw, 36px) !important;
+  }
+  .product-story-intro h2 {
+    font-size: 34px !important;
+  }
+  .story-media-card h3 {
+    font-size: 27px;
+  }
+  .home-page .craft-preview .section-heading h2,
+  .home-page .story-copy-block h2 {
+    font-size: 32px;
+  }
+  .home-page .hero-art {
+    display: block;
+    width: calc(100vw - 32px) !important;
+    min-height: auto;
+    padding-inline: 6px;
+  }
+  .museum-frame.framed-photo,
+  .home-page .hero-art .museum-frame.framed-photo {
+    width: calc(100vw - 44px) !important;
+    max-width: calc(100vw - 44px) !important;
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    transform: none;
+  }
+  .home-page .archival-note {
+    right: 4px;
+    width: 112px;
+  }
+  .product-actions,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .product-actions > span {
+    text-align: center;
+  }
+  .proofs article {
+    padding: 20px 22px;
+  }
+}
+
+/* Navigation and editorial legibility at 100% browser zoom. */
+.main-nav {
+  font-size: 14px;
+}
+.locale-switch {
+  font-size: 12px;
+}
+.site-footer h3 {
+  font-size: 11px;
+}
+.site-footer div > a,
+.site-footer div > span {
+  margin-block: 9px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.footer-copy {
+  font-size: 10.5px;
+}
+
+/* Three concise collection principles. */
+.home-page .proofs article {
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  padding: 24px 28px;
+}
+.home-page .proofs h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+.home-page .proofs p {
+  max-width: 34em;
+  color: #494138;
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.65;
+}
+
+/* About vignette: horizontal monogram with a single-line editorial statement. */
+.home-page .story-grid {
+  grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr);
+  gap: clamp(42px, 5vw, 76px);
+  align-items: center;
+}
+.home-page .story-monogram {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .08em;
+  padding: 22px 32px;
+  font-size: clamp(78px, 8.5vw, 124px);
+  letter-spacing: -.08em;
+}
+.home-page .story-copy-block .kicker {
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.home-page .story-copy-block h2 {
+  max-width: none;
+  margin-bottom: 22px;
+  font-size: clamp(30px, 2.8vw, 40px);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.home-page .story-copy-block .text-link {
+  gap: 12px;
+  font-size: 14px;
+}
+
+@media (max-width: 1020px) {
+  .menu-toggle {
+    font-size: 13px;
+  }
+  .main-nav > a,
+  .locale-switch {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-page .proofs article {
+    padding: 22px 20px;
+  }
+  .home-page .proofs p {
+    font-size: 13px;
+  }
+  .home-page .story-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+  .home-page .story-monogram {
+    min-height: 145px;
+    padding: 18px 24px;
+    font-size: 76px;
+  }
+  .home-page .story-copy-block .kicker {
+    font-size: 12px;
+  }
+  .home-page .story-copy-block h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+    white-space: normal;
+  }
+  .home-page .story-copy-block .text-link {
+    font-size: 14px;
+  }
+  .site-footer h3 {
+    font-size: 12px;
+  }
+  .site-footer div > a,
+  .site-footer div > span {
+    font-size: 14px;
+  }
 }

@@ -5,7 +5,6 @@ import {useState} from 'react';
 import {useTranslations} from 'next-intl';
 import {Link, usePathname} from '@/i18n/navigation';
 import {LocaleSwitcher} from './LocaleSwitcher';
-import {CartButton} from './CartButton';
 
 const links = [
   ['/collection', 'collection'], ['/cities', 'cities'], ['/craft', 'craft'],
@@ -46,7 +45,6 @@ export function BrandHeader() {
         </button>
         <nav id="main-navigation" className={open ? 'main-nav open' : 'main-nav'} aria-label="Primary navigation">
           {links.map(([href, key]) => <Link key={href} href={href} onClick={() => setOpen(false)} className={pathname === href ? 'active' : ''}>{t(key)}</Link>)}
-          <CartButton />
           <LocaleSwitcher />
         </nav>
       </header>

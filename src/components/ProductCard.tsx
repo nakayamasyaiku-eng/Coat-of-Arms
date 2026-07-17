@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Locale } from "@/i18n/routing";
 import type { Product } from "@/lib/products";
-import { formatPrice } from "@/lib/products";
 import { Link } from "@/i18n/navigation";
 
 export function ProductCard({
@@ -25,24 +24,13 @@ export function ProductCard({
           fill
           sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1020px) 50vw, 33vw"
         />
-        <span className="edition-tab">
-          {product.editionNumber}/{product.editionTotal}
-        </span>
       </div>
       <div className="product-card-copy">
-        <p>{copy.city}</p>
-        <h3>{copy.title}</h3>
+        <p>{product.sku}</p>
+        <h3>{copy.city}</h3>
         <div>
-          <span>
-            {product.available
-              ? locale === "zh"
-                ? "可收藏"
-                : "Available"
-              : locale === "zh"
-                ? "已预订"
-                : "Reserved"}
-          </span>
-          <strong>{formatPrice(product, locale)}</strong>
+          <span>{locale === "zh" ? "铜拓 · 手工 · 限量" : "Copper · Hand-worked · Limited"}</span>
+          <strong aria-hidden="true">↗</strong>
         </div>
       </div>
     </Link>
