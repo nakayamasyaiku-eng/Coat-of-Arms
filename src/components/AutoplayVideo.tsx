@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 type AutoplayVideoProps = {
   src: string;
@@ -14,10 +14,10 @@ export function AutoplayVideo({
   enableSoundLabel,
 }: AutoplayVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const attemptedAutoplay = useRef(false);
+  const startedPlayback = useRef(false);
   const [needsSoundPermission, setNeedsSoundPermission] = useState(false);
 
-  const playWithSound = useCallback(async () => {
+  const enableSound = useCallback(async () => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -26,21 +26,37 @@ export function AutoplayVideo({
 
     try {
       await video.play();
+      startedPlayback.current = true;
       setNeedsSoundPermission(false);
     } catch {
-      // Audible autoplay is often browser-blocked. Keep the film moving and
-      // request the single user gesture needed to restore its soundtrack.
-      video.muted = true;
-      await video.play().catch(() => undefined);
       setNeedsSoundPermission(true);
     }
   }, []);
 
-  useEffect(() => {
-    if (attemptedAutoplay.current) return;
-    attemptedAutoplay.current = true;
-    void playWithSound();
-  }, [playWithSound]);
+  const tryAutoplay = useCallback(async () => {
+    const video = videoRef.current;
+    if (!video || startedPlayback.current) return;
+
+    video.muted = false;
+    video.volume = 1;
+
+    try {
+      await video.play();
+      startedPlayback.current = true;
+      setNeedsSoundPermission(false);
+    } catch {
+      // Browsers commonly block audible autoplay. Retry muted so the film
+      // still starts, then expose the one-click soundtrack control.
+      video.muted = true;
+      try {
+        await video.play();
+        startedPlayback.current = true;
+      } catch {
+        return;
+      }
+      setNeedsSoundPermission(true);
+    }
+  }, []);
 
   return (
     <div className="autoplay-video-shell">
@@ -52,12 +68,7 @@ export function AutoplayVideo({
         controls
         preload="auto"
         poster={poster}
-        onCanPlay={() => {
-          if (!attemptedAutoplay.current) {
-            attemptedAutoplay.current = true;
-            void playWithSound();
-          }
-        }}
+        onCanPlay={() => void tryAutoplay()}
       >
         <source src={src} type="video/mp4" />
       </video>
@@ -65,7 +76,7 @@ export function AutoplayVideo({
         <button
           className="enable-video-sound"
           type="button"
-          onClick={() => void playWithSound()}
+          onClick={() => void enableSound()}
         >
           <span aria-hidden="true">♪</span>
           {enableSoundLabel}

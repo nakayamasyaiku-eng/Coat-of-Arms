@@ -118,6 +118,12 @@
     "message": "Your note",
     "send": "Send acquisition request",
     "success": "Your request has reached the studio.",
+    "successKicker": "Request received",
+    "successTitle": "Thank you for your private acquisition request",
+    "successText": "The studio has received your details and will contact you as soon as possible using the information you provided.",
+    "successWork": "Selected work",
+    "successNote": "Please watch for an email, phone call or WhatsApp message.",
+    "successAction": "Return to the archive",
     "error": "The message could not be sent. Please try again or email us directly.",
     "messagePlaceholder": "Framing, delivery or anything you would like us to confirm."
   },

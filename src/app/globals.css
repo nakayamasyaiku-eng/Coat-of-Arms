@@ -320,14 +320,27 @@ img { display: block; }
   }
 }
 
-/* Updated circular brand emblem for the header and footer lockups. */
+/* Transparent brand emblem: preserve its silhouette without a circular crop. */
+.brand-logo-emblem {
+  flex: 0 0 57px;
+  width: 57px;
+  height: 54px;
+  overflow: visible;
+  border-radius: 0;
+}
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: none;
+}
 .footer-brand-emblem {
   position: relative;
-  flex: 0 0 72px;
-  width: 72px;
+  flex: 0 0 76px;
+  width: 76px;
   height: 72px;
-  overflow: hidden;
-  border-radius: 50%;
+  overflow: visible;
+  border-radius: 0;
 }
 .footer-brand-logo {
   position: static;
@@ -335,14 +348,14 @@ img { display: block; }
   width: 100%;
   max-width: 100%;
   height: 100%;
-  object-fit: cover;
-  transform: scale(1.035);
+  object-fit: contain;
+  transform: none;
 }
 
 @media (max-width: 760px) {
   .brand-logo-emblem {
-    flex-basis: 44px;
-    width: 44px;
+    flex-basis: 46px;
+    width: 46px;
     height: 44px;
   }
   .brand-logo {
@@ -408,7 +421,7 @@ img { display: block; }
 }
 .museum-frame.framed-photo img,
 .product-image-wrap img {
-  object-fit: cover;
+  object-fit: contain;
 }
 .product-image-wrap {
   aspect-ratio: 763 / 999;
@@ -513,6 +526,59 @@ img { display: block; }
 }
 .paper-form {
   box-shadow: 0 20px 42px rgba(43, 30, 20, .08);
+}
+.inquiry-success {
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(54px, 7vw, 92px);
+}
+.inquiry-success-seal {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 34px;
+  color: #f4e9d6;
+  background: var(--wax);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 4px rgba(255,255,255,.12), 0 6px 14px rgba(58,22,17,.18);
+  font: 500 30px/1 var(--display);
+}
+.inquiry-success h2 {
+  max-width: 14ch;
+  margin: 8px 0 22px;
+  font: 600 clamp(42px, 5vw, 66px)/1.04 var(--display);
+}
+.inquiry-success-copy {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+.inquiry-success dl {
+  width: min(100%, 520px);
+  margin: 34px 0 18px;
+  padding-block: 16px;
+  border-block: 1px solid var(--line);
+}
+.inquiry-success dt {
+  color: var(--copper-dark);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.inquiry-success dd {
+  margin: 7px 0 0;
+  font: 600 20px/1.25 var(--display);
+}
+.inquiry-success-note {
+  margin: 0 0 30px;
+  color: var(--ink-muted);
+  font-size: 11px;
 }
 
 @media (max-width: 760px) {
