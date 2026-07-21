@@ -12,11 +12,11 @@ export async function SiteFooter() {
           <span className="footer-brand-emblem">
             <Image
               className="footer-brand-logo"
-              src="/brand/coat-of-arms-emblem.svg"
+              src="/brand/coat-of-arms-emblem-transparent-20260722.svg"
               alt=""
               aria-hidden="true"
-              width={985}
-              height={1011}
+              width={1416}
+              height={1339}
               unoptimized
             />
           </span>

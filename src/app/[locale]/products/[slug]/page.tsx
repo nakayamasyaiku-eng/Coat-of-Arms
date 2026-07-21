@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { products, getProduct, formatPrice } from "@/lib/products";
+import { products, getProduct } from "@/lib/products";
 import { Link } from "@/i18n/navigation";
 import { MuseumFrame } from "@/components/MuseumFrame";
 import { ProductActions } from "@/components/ProductActions";
@@ -47,18 +47,12 @@ export default async function ProductPage({
   const related = products.filter((item) => item.slug !== slug).slice(0, 3);
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "VisualArtwork",
     name: copy.title,
     description: copy.short,
-    sku: p.sku,
-    material: t("materialValue"),
-    offers: {
-      "@type": "Offer",
-      price: (p.priceCents / 100).toFixed(2),
-      priceCurrency: p.currency,
-      availability: "https://schema.org/InStock",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/${locale}/products/${slug}`,
-    },
+    identifier: p.sku,
+    artMedium: t("materialValue"),
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/${locale}/products/${slug}`,
   };
   return (
     <section className="page-section product-page">
@@ -84,13 +78,7 @@ export default async function ProductPage({
           </p>
           <h1>{copy.title}</h1>
           <p className="product-short">{copy.short}</p>
-          <div className="price-line">
-            <strong>{formatPrice(p, locale)}</strong>
-            <span>
-              {t("edition", { number: p.editionNumber, total: p.editionTotal })}
-              <small>{t("stock", { count: p.stock })}</small>
-            </span>
-          </div>
+          <p className="acquisition-meta">{t("limitedLabel")}</p>
           <ProductActions slug={p.slug} />
           <div className="object-data">
             <h2>{c("details")}</h2>
@@ -108,7 +96,7 @@ export default async function ProductPage({
             </dl>
           </div>
           <aside className="certificate-note">
-            <div>1/{p.editionTotal}</div>
+            <div>CA</div>
             <h2>{t("authTitle")}</h2>
             <p>{t("authText")}</p>
           </aside>
